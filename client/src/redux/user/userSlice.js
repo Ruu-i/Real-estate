@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { deleteUser } from './../../../../api/controllers/user.controller';
 
 const initialState = {
     currentUser: null,
@@ -34,6 +35,18 @@ const userSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
+        deleteUserStart: (state) => {
+            state.loading = true;
+        },
+        deleteUserSuccess: (state) => {
+            state.currentUser = null;
+            state.loading = false;
+            state.error = null;
+        },
+        deleteUserFailure: (state, action) => {
+            stastate.error = action.payload;
+            state.loading = false;
+        }
     }
 });
 
@@ -43,7 +56,10 @@ export const {
      signInFailure,
      updateUserStart,
      updateUserSuccess,
-     updateUserFailure
+     updateUserFailure,
+     deleteUserStart,
+     deleteUserSuccess,
+     deleteUserFailure
     
     } = userSlice.actions;
 
